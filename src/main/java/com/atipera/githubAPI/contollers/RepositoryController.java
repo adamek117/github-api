@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atipera.githubAPI.models.Repository;
-import com.atipera.githubAPI.models.RepositoryDTO;
-import com.atipera.githubAPI.services.IUserRepositoryService;
+import com.atipera.githubAPI.models.DTOs.RepositoryDTO;
+import com.atipera.githubAPI.services.intefaces.IUserRepositoryService;
 
 @RestController
 @RequestMapping("/github")

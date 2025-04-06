@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.atipera.githubAPI.helpers.IUserHelper;
+import com.atipera.githubAPI.helpers.interfaces.IUserHelper;
 import com.atipera.githubAPI.models.User;
+import com.atipera.githubAPI.repositories.interfaces.IUserRepository;
 
 @Repository
 public class UserRepository implements IUserRepository {

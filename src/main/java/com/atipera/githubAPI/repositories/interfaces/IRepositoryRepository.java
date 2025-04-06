@@ -1,4 +1,4 @@
-package com.atipera.githubAPI.repositories;
+package com.atipera.githubAPI.repositories.interfaces;
 
 import java.util.List;
 

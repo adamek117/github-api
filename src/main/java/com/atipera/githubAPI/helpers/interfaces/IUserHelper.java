@@ -1,4 +1,4 @@
-package com.atipera.githubAPI.helpers;
+package com.atipera.githubAPI.helpers.interfaces;
 
 import java.util.List;
 

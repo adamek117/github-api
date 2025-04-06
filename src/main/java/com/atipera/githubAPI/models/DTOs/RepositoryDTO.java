@@ -1,6 +1,8 @@
-package com.atipera.githubAPI.models;
+package com.atipera.githubAPI.models.DTOs;
 
 import java.util.List;
+
+import com.atipera.githubAPI.models.Branch;
 
 import lombok.Getter;
 import lombok.Setter;

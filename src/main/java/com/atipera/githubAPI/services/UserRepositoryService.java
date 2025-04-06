@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atipera.githubAPI.models.Repository;
-import com.atipera.githubAPI.repositories.IRepositoryRepository;
-import com.atipera.githubAPI.repositories.IUserRepository;
+import com.atipera.githubAPI.repositories.interfaces.IRepositoryRepository;
+import com.atipera.githubAPI.repositories.interfaces.IUserRepository;
+import com.atipera.githubAPI.services.intefaces.IUserRepositoryService;
 
 @Service
 public class UserRepositoryService implements IUserRepositoryService {

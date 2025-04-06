@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.atipera.githubAPI.helpers.IRepositoryHelper;
+import com.atipera.githubAPI.helpers.interfaces.IRepositoryHelper;
+import com.atipera.githubAPI.repositories.interfaces.IRepositoryRepository;
 
 @Repository
 public class RepositoryRepository implements IRepositoryRepository {
