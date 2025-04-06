@@ -2,7 +2,6 @@ package com.atipera.githubAPI.contollers;
 
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,40 +11,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atipera.githubAPI.models.Repository;
-import com.atipera.githubAPI.models.DTOs.RepositoryDTO;
-import com.atipera.githubAPI.services.intefaces.IUserRepositoryService;
+import com.atipera.githubAPI.models.DTOs.RepositoryDto;
+import com.atipera.githubAPI.services.intefaces.IGitHubService;
 
 @RestController
-@RequestMapping("/github")
+@RequestMapping("/api/github")
 public class RepositoryController {
 
-    private final IUserRepositoryService userRepositoryService;
+    private final IGitHubService gitHubService;
 
     @Autowired
-    public RepositoryController(IUserRepositoryService userRepositoryService) {
-        this.userRepositoryService = userRepositoryService;
+    public RepositoryController(IGitHubService gitHubService) {
+        this.gitHubService = gitHubService;
     }
 
-    @GetMapping("/user/{userId}/repos")
-    public ResponseEntity<Object> getUserRepos(@PathVariable String userId) {
-        try {
-            List<Repository> repositories = userRepositoryService.getUserRepositories(userId);
-            if (repositories.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(Map.of(
-                                "status", HttpStatus.NOT_FOUND.value(),
-                                "message", "No repositories found for user: " + userId));
+    @GetMapping("/user/{username}/repos")
+    public ResponseEntity<Object> getUserRepositories(@PathVariable String username) {
+            List<RepositoryDto> repos = gitHubService.getUserRepositories(username);
+            if (repos == null || repos.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                        "status", HttpStatus.NOT_FOUND.value(),
+                        "message", "No repositories found for user: " + username));
             }
-            List<RepositoryDTO> repositoriesDTO = repositories.stream()
-                    .map(repo -> new RepositoryDTO(repo.getName(), repo.getOwnerLogin(), repo.getBranches()))
-                    .toList();
-            return new ResponseEntity<>(repositoriesDTO, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of(
-                            "status", HttpStatus.NOT_FOUND.value(),
-                            "message", "User not found"));
-        }
+            return ResponseEntity.ok(repos);
     }
+   
 }

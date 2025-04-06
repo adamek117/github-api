@@ -1,5 +1,7 @@
 package com.atipera.githubAPI.models;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Branch {
+public class RepositoryModel {
     private String name;
-    private Commit commit;
+    private Owner owner;
+    private List<Branch> branches;
+    private Boolean fork;
 
 }

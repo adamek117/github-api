@@ -1,4 +1,4 @@
-package com.atipera.githubAPI.models;
+package com.atipera.githubAPI.models.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Branch {
+public class BranchDto {
     private String name;
-    private Commit commit;
+    private String commitSha;
 
 }

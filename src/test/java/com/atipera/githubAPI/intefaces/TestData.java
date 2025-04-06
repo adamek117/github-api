@@ -3,8 +3,8 @@ package com.atipera.githubAPI.intefaces;
 public interface TestData {
 
     interface UserData {
-        String USER_ID_NOT_FOUND = "nonexistent-user";
-        String USER_ID_NOT_FORKED = "2";
-        String USER_ID_FORKED = "1";  
+        String USER_NOT_EXISTED = "nonexistent-user";
+        String USER_EXISTED = "adamek117";
+        String USER_WITH_FORKED_REPO = "adamek117";  
     }
 }
