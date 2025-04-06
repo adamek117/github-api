@@ -1,4 +1,11 @@
-A Spring Boot application that provides a REST API to list **non-fork** repositories for a given GitHub user. For each repository, the API returns its name, owner login, and a list of branches with their last commit SHA.
+A Spring Boot application that provides a REST API to list **non-fork** repositories for a given GitHub user.  
+For each repository, the API returns:
+
+- Repository name
+- Owner login
+- A list of branches with:
+  - Branch name
+  - Last commit SHA
 
 ## 🛠 Tech Stack
 
@@ -6,6 +13,7 @@ A Spring Boot application that provides a REST API to list **non-fork** reposito
 - Spring Boot (MVC)
 - Maven
 - JUnit & Spring Boot Test (for integration testing)
+- Lombok
 
 
 ## 🚀 Running the application
