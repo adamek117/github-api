@@ -5,42 +5,45 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.atipera.githubAPI.services.GitHubService;
+
+import com.atipera.githubAPI.models.Repository;
+import com.atipera.githubAPI.services.IUserRepositoryService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class APITests {
 
     @Autowired
-    private GitHubService gitHubService;
+    private IUserRepositoryService userRepositoryService;
 
     @Test
-    public void getRepositories() {
-        String user = "adamek117";
-        List<Map<String, Object>> repos = gitHubService.getRepositories(user);
+    public void testGetExistedUserRepositories() {
+        List<Repository> repos = userRepositoryService.getUserRepositories("2");    
         assertNotNull(repos, "The response body should not be null");
         assertTrue(repos.size() > 0, "The response body should contain at least one repository");
-
-        Map<String, Object> firstRepo = repos.get(0);
-        assertTrue(firstRepo.containsKey("name"), "The repository should contain a 'name' key");
-        assertTrue(firstRepo.containsKey("ownerLogin"), "The repository should contain an 'ownerLogin' key");
-        assertTrue(firstRepo.containsKey("branches"), "The repository should contain a 'branches' key");
-
     }
 
     @Test
-    public void testGetUserRepositoryNotFound() {
-        String user = "nonexistent-user";
-        try {
-            gitHubService.getRepositories(user);
-            fail("Expected exception for non-existent user");
-        } catch (Exception e) {
-            assertTrue(e instanceof GitHubUserNotFoundException, "Expected GitHubUserNotFoundException");
-        }
+    public void testGetNotExistedUserRepositories(){
+        List<Repository> repos = userRepositoryService.getUserRepositories("nonexistent-user");    
+        assertTrue(repos.size() == 0, "The response body should be empty for a non-existent user");
+        
     }
 
+    @Test
+    public void testGetUserRepositoryNotForkedNotFound() {
+        List<Repository> repos = userRepositoryService.getUserRepositories("1"); 
+        assertTrue(repos.size() == 0, "The response body should be empty for a non-existent user");
+    }
+
+    @Test
+    public void testGetUserRepositoryNotForked() {
+        List<Repository> repos = userRepositoryService.getUserRepositories("2"); 
+        assertNotNull(repos, "The response body should not be null");
+        assertTrue(repos.size() > 0, "The response body should contain at least one repository");
+    }
+ 
 }

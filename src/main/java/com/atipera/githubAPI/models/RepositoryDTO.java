@@ -7,17 +7,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Repository {
+public class RepositoryDTO {
     private String name;
     private String ownerLogin;
     private List<Branch> branches;
-    private Boolean isForked;
 
-    public Repository(String name, String ownerLogin, List<Branch> branches, Boolean isForked) {
+    public RepositoryDTO(String name, String ownerLogin, List<Branch> branches) {
         this.name = name;
         this.ownerLogin = ownerLogin;
         this.branches = branches;
-        this.isForked = isForked;
     }
 
 }
